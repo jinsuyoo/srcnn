@@ -70,10 +70,10 @@ python main.py --is_training=False \
 ## References
 
 - [Official Website][1]
-    - I referred to the original Matlab and Caffe code.
+    - We referred to the original Matlab and Caffe code.
 
 - [tegg89/SRCNN-Tensorflow][2]
-    - I highly followed the structure of this repository.
+    - We highly followed the structure of this repository.
 
 [intro]: ./figs/1.png
 [results1]: ./figs/2.png
