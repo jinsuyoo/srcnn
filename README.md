@@ -56,7 +56,7 @@ python main.py --is_training=False \
     --test_dataset=YOUR_DATASET \
     --scale=4
 ```
-
+  
 ## Results
 
 ### Here are some results testing with various datasets.
@@ -68,7 +68,7 @@ python main.py --is_training=False \
 ![results2][results2]
 
 ## References
-----
+
 - [Official Website][1]
     - I referred to the original Matlab and Caffe code.
 
