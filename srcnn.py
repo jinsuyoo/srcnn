@@ -133,7 +133,7 @@ class SRCNN(object):
                 print('Epoch: [%d], time: [%s], loss: [%.8f]' % (i, print_time(time()-start_time), err))
                 
                 # Every 50 epoch, validate current model to decide whether save or not
-                if (i+1) % 1 == 0:
+                if (i+1) % 50 == 0:
                     print('[*] Validating model at epoch %d to decide whether to save or not' % (i+1))
                     valid_loss = 0
                     batch_idxs = len(valid_images) // self.batch_size
