@@ -74,10 +74,10 @@ def make_sub_images(path, is_training=True):
 # to get one final result SR image 
 def merge_output(sub_images, size):
     h, w = sub_images.shape[1], sub_images.shape[2]
-    result = np.zeros((h*size[0], w*size[1], 1))
+    result = np.zeros((h*size[1], w*size[0], 1))
     for idx, sub_image in enumerate(sub_images):
-        i = idx % size[1]
-        j = idx // size[1]
+        i = idx % size[0]
+        j = idx // size[0]
         result[j*h:j*h+h, i*w:i*w+w, :] = sub_image
     return result
 

@@ -79,7 +79,8 @@ class SRCNN(object):
         conv2 = tf.nn.relu(conv2)
         conv3 = tf.nn.conv2d(conv2, self.weights['w3'], strides=[1,1,1,1], padding='VALID')
         conv3 = conv3 + self.biases['b3']
-        return conv3
+        output = tf.clip_by_value(conv3, clip_value_min=0., clip_value_max=1.)
+        return output
 
 
     def train(self):
@@ -173,7 +174,7 @@ class SRCNN(object):
 
             sub_start = 0
             
-            for i, (n_w, n_h) in enumerate(merge_info):
+            for i, (n_h, n_w) in enumerate(merge_info):
                 n_sub = n_w * n_h
                 
                 images = test_images[sub_start : sub_start+n_sub]
