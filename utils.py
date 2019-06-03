@@ -39,19 +39,19 @@ def make_sub_images(path, is_training=True):
 
         low_images.append(low_image)
         labels.append(label)
-        #w, h, _ = low_image.shape
-        w, h = low_image.shape
-        for i in range(0, w-fsub+1, stride):
-            n_sub_w += 1
-            n_sub_h = 0
-            for j in range(0, h-fsub+1, stride):
-                n_sub_h += 1
+       
+        h, w = low_image.shape
+        for i in range(0, h-fsub+1, stride):
+            n_sub_h += 1
+            n_sub_w = 0
+            for j in range(0, w-fsub+1, stride):
+                n_sub_w += 1
                 sub_image = low_image[i:i+fsub, j:j+fsub] 
                 sub_label = label[i+padding:i+padding+flabel, j+padding:j+padding+flabel]
                 #sub_image = low_image[i:i+fsub, j:j+fsub, :] 
                 #sub_label = label[i+padding:i+padding+flabel, j+padding:j+padding+flabel, :]
 
-                # Type casting ... (W, H) -> (W, H, 1)
+                # Type casting ... (H, W) -> (H, W, 1)
                 sub_image = sub_image.reshape([fsub, fsub, 1])  
                 sub_label = sub_label.reshape([flabel, flabel, 1])
                 
@@ -59,7 +59,7 @@ def make_sub_images(path, is_training=True):
                 sub_labels.append(sub_label)
         # Merge information contains required number of sub images
         # in width, height for each to make SR test image 
-        merge_info.append([n_sub_w, n_sub_h])
+        merge_info.append([n_sub_h, n_sub_w])
 
     arr_sub_images = np.asarray(sub_images)
     arr_sub_labels = np.asarray(sub_labels)
