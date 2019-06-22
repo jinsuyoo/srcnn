@@ -5,7 +5,7 @@ Tensorflow implementation of **Image Super-Resolution Using Deep Convolutional N
 ![intro][intro]
 
 ## Implementation Details
-
+asdfasdf
 Our implementation uses Tensorflow to train SRCNN. We use almost same methods as described in the paper, but there are some slightly different approaches. We train the network with 291 dataset and validate with 91 dataset. Because 291 dataset generates above 25,000 sub-images, we decrease epoch to 3000. At test time, to get as same size as bicubic interpolated image, we fill in cropped pixels on border with bicubic interpolated pixels.
 
 Note that we just train and test with 1-channel. If you want to use with 3-channels, you may add some type-casting code.
