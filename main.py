@@ -5,7 +5,7 @@ import os
 
 
 flags = tf.app.flags
-flags.DEFINE_integer('epoch', 5000, 'Number of epoch')
+flags.DEFINE_integer('epoch', 10000, 'Number of epoch')
 flags.DEFINE_integer('batch_size', 128, 'The size of batch images')
 flags.DEFINE_integer('image_size', 33, 'The size of sub-image')
 flags.DEFINE_integer('label_size', 21, 'The size of label')
@@ -19,7 +19,7 @@ flags.DEFINE_string('train_dataset_path', 'Train', 'The path of train dataset')
 flags.DEFINE_string('test_dataset_path', 'Test', 'The path of test dataset')
 flags.DEFINE_string('train_dataset', '91', 'The name of training dataset')
 flags.DEFINE_string('valid_dataset', 'Set5', 'The name of training dataset')
-flags.DEFINE_string('test_dataset', 'Set14', 'The name of testing dataset')
+flags.DEFINE_string('test_dataset', 'Set5', 'The name of testing dataset')
 
 flags.DEFINE_string('checkpoint_path', 'checkpoint', 'The path of checkpoint directory')
 flags.DEFINE_boolean('use_pretrained', False, 'True for use pre-trained model, False for train on your own')

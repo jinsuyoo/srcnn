@@ -17,8 +17,6 @@ class SRCNN(object):
         self.image_size = [None, None, None, 1]
         self.label_size = [None, None, None, 1]
 
-        self.scale = config.scale
-        
         self.build_model()
     
 
@@ -125,7 +123,6 @@ class SRCNN(object):
                 valid_input_y = valid_input_y.reshape([1, h, w, 1])
                 valid_label_y = valid_label_y.reshape([1, h, w, 1])
 
-                
                 result = self.sess.run(self.result, feed_dict={self.images: valid_input_y, self.labels: valid_label_y})
                 
                 valid_label_y = crop_border(valid_label_y[0])
@@ -207,7 +204,7 @@ class SRCNN(object):
         if not os.path.exists(path):
             os.makedirs(path)
         
-        self.saver.save(self.sess, os.path.join(path, model_name), global_step=epoch+12450)
+        self.saver.save(self.sess, os.path.join(path, model_name), global_step=epoch)
         print('[*] Save checkpoint at %d epoch' % epoch)
 
 
