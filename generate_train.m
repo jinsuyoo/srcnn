@@ -21,7 +21,7 @@ for i = 1 : length(filepaths)
     image = rgb2ycbcr(image);
     image = im2double(image(:, :, 1));
     
-    [hei,wid] = size(im_label);
+    [hei,wid] = size(image);
     im_label = image(1:hei-mod(hei, scale), 1:wid-mod(wid, scale));
     
     im_input = imresize(imresize(im_label,1/scale,'bicubic'),[hei,wid],'bicubic');
