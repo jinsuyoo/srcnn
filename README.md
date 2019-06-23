@@ -78,9 +78,9 @@ Please note that if you want to train or test with your own dataset, you need to
 ### The average results of PSNR (dB) trained with up-scale factor 3
 
 *Code* | *Dataset* | *Scale* | *Bicubic* | *SRCNN*
-:---: | :---: | :--- | :---: | :---: |
-**SRCNN-paper** | Set5 | 3 | 30.39dB | 32.39dB
-**SRCNN-Tensorflow**| Set5 | 3 | 30.38dB | 32.39dB
+:---: | :---: | :---: | :---: | :---: |
+**SRCNN** | Set5 | 3x | 30.39dB | 32.39dB
+**SRCNN-Tensorflow**| Set5 | 3x | 30.38dB | 32.39dB
 
 ### Some of the result images
 
