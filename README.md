@@ -8,13 +8,13 @@ Tensorflow implementation of **Image Super-Resolution Using Deep Convolutional N
 
 ## Implementation Details
 
-Our implementation uses TensorFlow to train SRCNN. We use almost same methods as described in the paper. We train the network with 91-image dataset and validate with Set5 dataset while training. At test time, to get the same result size for up-scaling factor 2, 3 and 4, we crop the test image with 12, which is the Least Common Multiple. Also, we pad border of the ground truth and bicubic interpolated test image by 6 to make same size with SRCNN result. 
+Our implementation used TensorFlow to train SRCNN. We used almost same methods as described in the paper. We trained the network with 91-image dataset and validated with Set5 dataset while training. At test time, to get the same result size for up-scaling factor 2, 3 and 4, we cropped the test image with 12, which is the Least Common Multiple. Also, we padded border of the ground truth and bicubic interpolated test image by 6 to make same size with SRCNN result. 
 
-According to the paper, the best performance on Set5 with upscaling factor 3 is the  average PSNR value of 32.75dB with filter size 9-5-5 and ImageNet training dataset, but we are **aim to 32.39dB** which is the demonstrated average PSNR value when the model is trained with 91-image dataset, 9-1-5 filter size and Y only. After training 12,500 epoch, we get the same value to the paper, **32.39dB**.
+According to the paper, the best performance on Set5 with upscaling factor 3 is the average PSNR value of 32.75dB with filter size 9-5-5 and ImageNet training dataset, but we were **aim to 32.39dB** which is the demonstrated average PSNR value when the model is trained with 91-image dataset, 9-1-5 filter size and Y only. After training 12,500 epoch, we got the same value to the paper, **32.39dB**.
 
 Pretrained-model with 91-image training dataset and up-scaling factor 3 is given.
 
-Note that we train and test with Y-channel. If you want to train and test with 3-channels (YCbCr or RGB), you may add or implement some type-casting code.
+Note that we trained and tested with Y-channel. If you want to train and test with 3-channels (YCbCr or RGB), you may add or implement some type-casting code.
 
 ## Installation
 
