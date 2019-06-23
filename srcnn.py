@@ -114,7 +114,6 @@ class SRCNN(object):
                 loss += err
 
             valid_psnr = []
-            
             for idx in range(len(valid_images)):
                 h, w, _ = valid_images[idx].shape
                 valid_input_y = valid_images[idx][:, :, 0]
@@ -133,7 +132,7 @@ class SRCNN(object):
                 
             print('[*] Epoch: [%d], psnr: [bicubic: %.2f, srcnn: %.2f], loss: [%.8f]' % (i+1, np.mean(bicubic_psnr), np.mean(valid_psnr), loss/batch_idxs))
             
-            # Every 50 epoch, validate current model to decide whether save or not
+            # Save model for every 50 epoch
             if (i+1) % 50 == 0:
                 self.save(i+1, config)
         print('[*] Training done ! Congrats :) ')

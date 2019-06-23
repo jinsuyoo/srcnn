@@ -1,6 +1,6 @@
 clear;close all;
 %% settings
-folder = 'Train';
+folder = 'Train/91';
 savepath = 'train.h5';
 size_input = 33;
 size_label = 21;

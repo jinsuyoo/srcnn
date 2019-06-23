@@ -51,8 +51,7 @@ Use `main.py` to train the network. Run `python main.py` to view the training pr
 python main.py
 
 # Example usage
-python main.py --train_dataset=YOUR_DATASET \
-    --use_pretrained=False \
+python main.py --use_pretrained=False \
     --epoch=1000 \
     --scale=4 \
 ```
