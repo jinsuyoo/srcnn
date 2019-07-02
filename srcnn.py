@@ -152,7 +152,6 @@ class SRCNN(object):
         
         self.load(config)
 
-        sub_start = 0
         for idx in tqdm(range(len(test_images))):
             h, w, _ = test_images[idx].shape
             test_input_y = test_images[idx][:, :, 0]
