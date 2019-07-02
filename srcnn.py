@@ -38,7 +38,7 @@ class SRCNN(object):
         self.forward = self.model()
 
         # Loss Function : Mean Square Error
-        self.loss = tf.reduce_mean(tf.square(self.labels - self.forward))
+        self.loss = tf.reduce_mean(tf.square(tf.subtract(self.labels, self.forward)))
 
         # Clip output
         self.result = tf.clip_by_value(self.forward, clip_value_min=0., clip_value_max=1.)
@@ -52,14 +52,11 @@ class SRCNN(object):
     # Layer3 : (5 x 5 x 32 x 1)
     # Output : (21 x 21 x 1)
     def model(self):
-        conv1 = tf.nn.conv2d(self.images, self.weights['w1'], strides=[1,1,1,1], padding='VALID')
-        conv1 = conv1 + self.biases['b1']
-        conv1 = tf.nn.relu(conv1)
-        conv2 = tf.nn.conv2d(conv1, self.weights['w2'], strides=[1,1,1,1], padding='VALID')
-        conv2 = conv2 + self.biases['b2']
-        conv2 = tf.nn.relu(conv2)
-        conv3 = tf.nn.conv2d(conv2, self.weights['w3'], strides=[1,1,1,1], padding='VALID')
-        output = conv3 + self.biases['b3']
+        conv1 = tf.nn.relu(tf.nn.bias_add(tf.nn.conv2d(self.images, self.weights['w1'], strides=[1,1,1,1], padding='VALID'), self.biases['b1']))
+
+        conv2 = tf.nn.relu(tf.nn.bias_add(tf.nn.conv2d(conv1, self.weights['w2'], strides=[1,1,1,1], padding='VALID'), self.biases['b2']))
+       
+        output = tf.nn.bias_add(tf.nn.conv2d(conv2, self.weights['w3'], strides=[1,1,1,1], padding='VALID'), self.biases['b3'])
     
         return output
 
@@ -130,7 +127,7 @@ class SRCNN(object):
                         bicubic_psnr.append(psnr(valid_label_y, crop_border(valid_input_y[0])))
                 valid_psnr.append(psnr(valid_label_y, result[0]))
                 
-            print('[*] Epoch: [%d], psnr: [bicubic: %.2f, srcnn: %.2f], loss: [%.8f]' % (i+1, np.mean(bicubic_psnr), np.mean(valid_psnr), loss/batch_idxs))
+            print('[*] Epoch: [{:d}], psnr: [bicubic: {:.2f}, srcnn: {:.2f}], loss: [{:.8f}]'.format(i+1, np.mean(bicubic_psnr), np.mean(valid_psnr), loss/batch_idxs))
             
             # Save model for every 50 epoch
             if (i+1) % 50 == 0:
@@ -192,8 +189,8 @@ class SRCNN(object):
 
             save_result(path, gt, bicubic, result, idx)
             
-        print('[*] PSNR of ground truth and bicubic : %.2f'% np.mean(bicubic_psnr))
-        print('[*] PSNR of ground truth and SRCNN   : %.2f'% np.mean(test_psnr))
+        print('[*] PSNR of ground truth and bicubic : {:.2f}'.format(np.mean(bicubic_psnr)))
+        print('[*] PSNR of ground truth and SRCNN   : {:.2f}'.format(np.mean(test_psnr)))
 
         
     def save(self, epoch, config):
@@ -204,7 +201,7 @@ class SRCNN(object):
             os.makedirs(path)
         
         self.saver.save(self.sess, os.path.join(path, model_name), global_step=epoch)
-        print('[*] Save checkpoint at %d epoch' % epoch)
+        print('[*] Save checkpoint at {:d} epoch'.format(epoch))
 
 
     def load(self, config):
@@ -216,7 +213,7 @@ class SRCNN(object):
         ckpt_path = tf.train.latest_checkpoint(path)
         if ckpt_path:
             self.saver.restore(self.sess, ckpt_path)
-            print('[*] Load checkpoint: %s' % ckpt_path)
+            print('[*] Load checkpoint: {}'.format(ckpt_path))
         else:
             print('[*] No checkpoint to load ... ')
         

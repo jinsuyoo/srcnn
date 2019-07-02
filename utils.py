@@ -57,7 +57,7 @@ def prepare_data(config, is_valid=False):
 
     dir_path = os.path.join(os.getcwd(), path)
     path_gt = os.path.join(dir_path, 'gt')
-    path_lr = os.path.join(dir_path, 'bicubic_%dx' % config.scale)
+    path_lr = os.path.join(dir_path, 'bicubic_{:d}x'.format(config.scale))
 
     # fnames = ['baby_GT.bmp, bird_GT.bmp, ...']
     fnames = os.listdir(path_gt)
@@ -79,9 +79,9 @@ def prepare_data(config, is_valid=False):
         labels.append(_label / 255.)
 
     if is_valid:
-        print('[*] Successfully prepared %d valid images !' % count)
+        print('[*] Successfully prepared {:d} valid images !'.format(count))
     else:
-        print('[*] Successfully prepared %d test images !' % count)
+        print('[*] Successfully prepared {:d} test images !'.format(count))
         
     return inputs, labels
 
